@@ -1,14 +1,17 @@
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.event.*;
 import java.util.*;
-
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class main {
    
 	static Scanner input = new Scanner(System.in);
-   static int command; //»ç¿ëÀÚÀÇ ÀÔ·ÂÀ» ¹Ş´Â Ä¿¸Çµå
-   static ATM atm = new ATM(); //ATM °´Ã¼
-   static DataBase DB = new DataBase(); //DataBase °´Ã¼
-   static Interface screen; //Interface °´Ã¼
+   static int command; //ì‚¬ìš©ìì˜ ì…ë ¥ì„ ë°›ëŠ” ì»¤ë§¨ë“œ
+   static ATM atm = new ATM(); //ATM ê°ì²´
+   static DataBase DB = new DataBase(); //DataBase ê°ì²´
+   static Interface screen; //Interface ê°ì²´
    static String id;
    static int password;
    
@@ -16,49 +19,11 @@ public class main {
       
       //login
       serviceOn();
-      while(true) {
-         command = screen.transaction();
-         //while(command == 0) {};
-    	 // command = 4; // test¿ë ÄÚµå ²À »èÁ¦ÇÏ±â¤¿!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-         long return_Cash;
-         //System.out.println(command);
-         switch(command) {
-         case 0:
-            break;
-         case 1:
-            return_Cash = screen.Show(command, id, DB, atm);
-            break;
-         case 2:
-            return_Cash = screen.Show(command, id, DB, atm);
-            atm.Deposit(DB, id, return_Cash);
-            break;
-         case 3:
-            return_Cash = screen.Show(command, id, DB, atm);
-            atm.WithDraw(DB, id, return_Cash);
-            break;
-         case 4:
-            return_Cash = screen.Show(command, id, DB, atm);
-            String to_id;
-            to_id = screen.to_id(0);
-        	if(DB.checkingId(to_id)==false) {
-        		while(DB.checkingId(to_id)==false) {
-        			to_id = screen.to_id(1);
-        		}
-        	}
-        	
-            atm.Remit(DB, id, to_id, return_Cash);
-            screen.remit_success(DB, id);
-            
-            break;
-         }
-         //command = 0; // test¿ë ÄÚµå ²À »èÁ¦ÇÏ±â¤¿!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-         if(command == 0) break;
-      }
-      serviceOff();
-      System.exit(0);
+      screen.transaction(DB, atm);
+      
    }
    
-   // GUI·Î ¹Ù²Ş
+   // GUIë¡œ ë°”ê¿ˆ
    private static void serviceOn() {
       String tmp_id = screen.Input_id(0);
       while(!Checkid(tmp_id)) {
@@ -71,14 +36,10 @@ public class main {
       id = tmp_id; password = tmp_pass;
    }
    
-   // 
-   private static void transaction() {
-      command = screen.transaction();
-   }
    private static void serviceOff() {
       screen.ShowDown();
    }
-   //ÀÔ·ÂÇÑ id°¡ Çü½Ä¿¡ ¸Â´ÂÁö È®ÀÎ
+   //ì…ë ¥í•œ idê°€ í˜•ì‹ì— ë§ëŠ”ì§€ í™•ì¸
    private static boolean Checkid(String id) {
 	   if(id.length() != 11) return false;
 		for(int i=0; i<id.length(); i++) {
@@ -93,7 +54,7 @@ public class main {
 		if(DB.checkingId(id)) return true;
 		else return false;
    }
-   //ÀÔ·ÂÇÑ password°¡ Çü½Ä¿¡ ¸Â´ÂÁö È®ÀÎ
+   //ì…ë ¥í•œ passwordê°€ í˜•ì‹ì— ë§ëŠ”ì§€ í™•ì¸
    private static boolean Checkpass(String id, int password) {
       if(!DB.matchingPassword(id, password)) return false;
       return true;
