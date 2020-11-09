@@ -12,76 +12,76 @@ public class Interface {
 	private static int input_flag;
 	private static int one_cnt, five_cnt;
    
-	//flag¿¡ µû¶ó »ç¿ëÀÚ¿¡°Ô ¹«¾ğ°¡ º¸¿©Áİ´Ï´Ù.
+	//flagì— ë”°ë¼ ì‚¬ìš©ìì—ê²Œ ë¬´ì–¸ê°€ ë³´ì—¬ì¤ë‹ˆë‹¤.
    static long Show(int flag, String id, DataBase db, ATM atm) {
 	  System.out.println(flag);
-      if(flag == 1) { // ÀÜ¾×Á¶È¸
+      if(flag == 1) { // ì”ì•¡ì¡°íšŒ
     	 // String message = String.format("Welcome %s, to ATM program!",name);
-    	 String message = String.format("ÀÜ¾× Á¶È¸ ¼­ºñ½ºÀÔ´Ï´Ù.\nÇØ´ç °èÁÂÀÇ ÀÜ¾×Àº : %d¿ø ÀÔ´Ï´Ù!\n",db.getBalance(id));
+    	 String message = String.format("ì”ì•¡ ì¡°íšŒ ì„œë¹„ìŠ¤ì…ë‹ˆë‹¤.\ní•´ë‹¹ ê³„ì¢Œì˜ ì”ì•¡ì€ : %dì› ì…ë‹ˆë‹¤!\n",db.getBalance(id));
     	 JOptionPane.showInternalMessageDialog(null, message);
          return -1;
       }
-      else if(flag == 2) { // ÀÔ±İ
+      else if(flag == 2) { // ì…ê¸ˆ
          while(true) {
-        	 String temp_cash = JOptionPane.showInputDialog("ÀÔ±İÇÒ ±İ¾×À» ÀÔ·ÂÇÏ¼¼¿ä");
+        	 String temp_cash = JOptionPane.showInputDialog("ì…ê¸ˆí•  ê¸ˆì•¡ì„ ì…ë ¥í•˜ì„¸ìš”");
         	 cash = Long.parseLong(temp_cash);
-        	 String t_one_cnt = JOptionPane.showInputDialog("ÀÔ±İÇÒ ÁöÆó¼ö Áß ¸¸¿ø±ÇÀÌ ¸î °³ÀÎÁö ÀÔ·ÂÇÏ¼¼¿ä");
+        	 String t_one_cnt = JOptionPane.showInputDialog("ì…ê¸ˆí•  ì§€íìˆ˜ ì¤‘ ë§Œì›ê¶Œì´ ëª‡ ê°œì¸ì§€ ì…ë ¥í•˜ì„¸ìš”");
         	 one_cnt = Integer.parseInt(t_one_cnt);
-        	 String t_five_cnt = JOptionPane.showInputDialog("ÀÔ±İÇÒ ÁöÆó¼ö Áß ¿À ¸¸¿ø±ÇÀÌ ¸î °³ÀÎÁö ÀÔ·ÂÇÏ¼¼¿ä");
+        	 String t_five_cnt = JOptionPane.showInputDialog("ì…ê¸ˆí•  ì§€íìˆ˜ ì¤‘ ì˜¤ ë§Œì›ê¶Œì´ ëª‡ ê°œì¸ì§€ ì…ë ¥í•˜ì„¸ìš”");
         	 five_cnt = Integer.parseInt(t_five_cnt);
         	 if(cash != ((long)one_cnt*10000)+((long)five_cnt*50000)) {
-                 //System.out.println("Àß¸øÀÔ·ÂÇÏ¼Ì½À´Ï´Ù! ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");
-        		 JOptionPane.showInternalMessageDialog(null, "Àß¸øÀÔ·ÂÇÏ¼Ì½À´Ï´Ù! ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+                 //System.out.println("ì˜ëª»ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤! ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");
+        		 JOptionPane.showInternalMessageDialog(null, "ì˜ëª»ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤! ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");
              }
         	 else {
         		 atm.one += one_cnt;
             	 atm.five += five_cnt;
-            	 String message = String.format("ÀÔ±İÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.\nÇØ´ç °èÁÂÀÇ ÀÜ¾×Àº : %d¿ø ÀÔ´Ï´Ù!\n",db.getBalance(id) + cash);
+            	 String message = String.format("ì…ê¸ˆì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.\ní•´ë‹¹ ê³„ì¢Œì˜ ì”ì•¡ì€ : %dì› ì…ë‹ˆë‹¤!\n",db.getBalance(id) + cash);
             	 JOptionPane.showInternalMessageDialog(null, message);
             	 break;
         	 }
          }
          return cash;
       }
-      else if(flag == 3) { // Ãâ±İ
+      else if(flag == 3) { // ì¶œê¸ˆ
          
          while(true) {
-        	 String temp_cash = JOptionPane.showInputDialog("Ãâ±İÇÒ ±İ¾×À» ÀÔ·ÂÇÏ¼¼¿ä");
+        	 String temp_cash = JOptionPane.showInputDialog("ì¶œê¸ˆí•  ê¸ˆì•¡ì„ ì…ë ¥í•˜ì„¸ìš”");
         	 cash = Long.parseLong(temp_cash);
-        	 String t_one_cnt = JOptionPane.showInputDialog("Ãâ±İÇÒ ÁöÆó¼ö Áß ¸¸¿ø±ÇÀÌ ¸î °³ÀÎÁö ÀÔ·ÂÇÏ¼¼¿ä");
+        	 String t_one_cnt = JOptionPane.showInputDialog("ì¶œê¸ˆí•  ì§€íìˆ˜ ì¤‘ ë§Œì›ê¶Œì´ ëª‡ ê°œì¸ì§€ ì…ë ¥í•˜ì„¸ìš”");
         	 one_cnt = Integer.parseInt(t_one_cnt);
-        	 String t_five_cnt = JOptionPane.showInputDialog("Ãâ±İÇÒ ÁöÆó¼ö Áß ¿À ¸¸¿ø±ÇÀÌ ¸î °³ÀÎÁö ÀÔ·ÂÇÏ¼¼¿ä");
+        	 String t_five_cnt = JOptionPane.showInputDialog("ì¶œê¸ˆí•  ì§€íìˆ˜ ì¤‘ ì˜¤ ë§Œì›ê¶Œì´ ëª‡ ê°œì¸ì§€ ì…ë ¥í•˜ì„¸ìš”");
         	 five_cnt = Integer.parseInt(t_five_cnt);
         	 if(cash != ((long)one_cnt*10000)+((long)five_cnt*50000)) {
-        		 JOptionPane.showInternalMessageDialog(null, "Àß¸øÀÔ·ÂÇÏ¼Ì½À´Ï´Ù! ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+        		 JOptionPane.showInternalMessageDialog(null, "ì˜ëª»ì…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤! ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");
              }
         	 else {
         		 int cmp_one = atm.one;
                  int cmp_five = atm.five;
                  
-                 // atm ³»ÀÇ ¸¸¿ø ±Ç°ú 5¸¸¿ø ±ÇÀÌ ¾ó¸¶³ª ³²¾Ò´ÂÁö¸¦ ÅëÇØ Ãâ±İ °¡´ÉÇÑÁö ÆÇ´Ü
+                 // atm ë‚´ì˜ ë§Œì› ê¶Œê³¼ 5ë§Œì› ê¶Œì´ ì–¼ë§ˆë‚˜ ë‚¨ì•˜ëŠ”ì§€ë¥¼ í†µí•´ ì¶œê¸ˆ ê°€ëŠ¥í•œì§€ íŒë‹¨
                  if(one_cnt <= cmp_one && five_cnt <= cmp_five) { 
                 	 atm.one -= one_cnt;
                 	 atm.five -= five_cnt;
-                	 String message = String.format("Ãâ±İÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.\nÇØ´ç °èÁÂÀÇ ÀÜ¾×Àº : %d¿ø ÀÔ´Ï´Ù!\n",db.getBalance(id) - cash);
+                	 String message = String.format("ì¶œê¸ˆì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.\ní•´ë‹¹ ê³„ì¢Œì˜ ì”ì•¡ì€ : %dì› ì…ë‹ˆë‹¤!\n",db.getBalance(id) - cash);
                 	 JOptionPane.showInternalMessageDialog(null, message);
                 	 break;
                  }
                  else {
-                	 JOptionPane.showInternalMessageDialog(null, "ATM ±â°èÀÇ ÁöÆó°¡ ºÎÁ·ÇÕ´Ï´Ù! ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+                	 JOptionPane.showInternalMessageDialog(null, "ATM ê¸°ê³„ì˜ ì§€íê°€ ë¶€ì¡±í•©ë‹ˆë‹¤! ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");
                  }
         	 }
          }
          return cash;
          
       }
-      else { // ¼Û±İ
-         // ÀÔ·Â ±İ¾× ¹× ÁöÆó¼ö È®ÀÎ
+      else { // ì†¡ê¸ˆ
+         // ì…ë ¥ ê¸ˆì•¡ ë° ì§€íìˆ˜ í™•ì¸
          while(true) {
-        	 String temp_cash = JOptionPane.showInputDialog("¼Û±İÇÒ ±İ¾×À» ÀÔ·ÂÇÏ¼¼¿ä");
+        	 String temp_cash = JOptionPane.showInputDialog("ì†¡ê¸ˆí•  ê¸ˆì•¡ì„ ì…ë ¥í•˜ì„¸ìš”");
         	 cash = Long.parseLong(temp_cash);
              if(cash > db.getBalance(id)) {
-            	 JOptionPane.showInternalMessageDialog(null, "°èÁÂ ÀÜ¾×ÀÌ ºÎÁ·ÇÕ´Ï´Ù! ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+            	 JOptionPane.showInternalMessageDialog(null, "ê³„ì¢Œ ì”ì•¡ì´ ë¶€ì¡±í•©ë‹ˆë‹¤! ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");
              }
              else break;
          }
@@ -90,105 +90,124 @@ public class Interface {
       }
    }
    
-   // ¼Û±İÇÒ °èÁÂ¸¦ ¸ŞÀÎÀ¸·Î ¸®ÅÏÇÏ´Â ÇÔ¼ö 
+   // ì†¡ê¸ˆí•  ê³„ì¢Œë¥¼ ë©”ì¸ìœ¼ë¡œ ë¦¬í„´í•˜ëŠ” í•¨ìˆ˜ 
    static String to_id(int x) {
-	   if(x == 0) remit_id = JOptionPane.showInputDialog("¼Û±İÇÒ °èÁÂ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä : ");
-	   else remit_id = JOptionPane.showInputDialog("Àß¸øµÈ ¼Û±İ °èÁÂÀÔ´Ï´Ù! ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");
+	   if(x == 0) remit_id = JOptionPane.showInputDialog("ì†¡ê¸ˆí•  ê³„ì¢Œë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš” : ");
+	   else remit_id = JOptionPane.showInputDialog("ì˜ëª»ëœ ì†¡ê¸ˆ ê³„ì¢Œì…ë‹ˆë‹¤! ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");
 	   return remit_id;
    }
    
    static void remit_success(DataBase db,String idid){
-	   	String message = String.format("¼Û±İÀ» ¿Ï·áÇß½À´Ï´Ù.\nÇØ´ç °èÁÂÀÇ ÀÜ¾×Àº : %d¿ø ÀÔ´Ï´Ù!\n",db.getBalance(idid));
+	   	String message = String.format("ì†¡ê¸ˆì„ ì™„ë£Œí–ˆìŠµë‹ˆë‹¤.\ní•´ë‹¹ ê³„ì¢Œì˜ ì”ì•¡ì€ : %dì› ì…ë‹ˆë‹¤!\n",db.getBalance(idid));
   	 	JOptionPane.showInternalMessageDialog(null, message);
    }
    
-   //½ÃÀÛ È­¸é º¸¿©ÁÖ±â
+   //ì‹œì‘ í™”ë©´ ë³´ì—¬ì£¼ê¸°
    static String Input_id(int x) {
-	  if(x == 0) id = JOptionPane.showInputDialog("¹İ°©½À´Ï´Ù °í°´´Ô! °èÁÂ ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä!");    // x == 0 ÀÌ¶ó¸é Ã³À½ ÀÔ·Â
-	  else id = JOptionPane.showInputDialog("°èÁÂ¹øÈ£¸¦ Àß¸ø ÀÔ·ÂÇß½À´Ï´Ù!! ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");      // x != 0 ÀÌ¶ó¸é ÀçÀÔ·Â
+	  if(x == 0) id = JOptionPane.showInputDialog("ë°˜ê°‘ìŠµë‹ˆë‹¤ ê³ ê°ë‹˜! ê³„ì¢Œ ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”!");    // x == 0 ì´ë¼ë©´ ì²˜ìŒ ì…ë ¥
+	  else id = JOptionPane.showInputDialog("ê³„ì¢Œë²ˆí˜¸ë¥¼ ì˜ëª» ì…ë ¥í–ˆìŠµë‹ˆë‹¤!! ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");      // x != 0 ì´ë¼ë©´ ì¬ì…ë ¥
       return id;
    }
    static int Input_pass(int x) {
 	  String temp_pw;
-	  if(x == 0)  temp_pw = JOptionPane.showInputDialog("ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä!");    			   // x == 0 ÀÌ¶ó¸é Ã³À½ ÀÔ·Â
-	  else temp_pw = JOptionPane.showInputDialog("ºñ¹Ğ¹øÈ£¸¦ Àß¸ø ÀÔ·ÂÇß½À´Ï´Ù!! ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä!");      // x != 0 ÀÌ¶ó¸é ÀçÀÔ·Â
+	  if(x == 0)  temp_pw = JOptionPane.showInputDialog("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”!");    			   // x == 0 ì´ë¼ë©´ ì²˜ìŒ ì…ë ¥
+	  else temp_pw = JOptionPane.showInputDialog("ë¹„ë°€ë²ˆí˜¸ë¥¼ ì˜ëª» ì…ë ¥í–ˆìŠµë‹ˆë‹¤!! ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”!");      // x != 0 ì´ë¼ë©´ ì¬ì…ë ¥
       password = Integer.parseInt(temp_pw);
       return password;
    }
    
-   static int transaction() {
+ 
+   
+   static void transaction(DataBase db, ATM atm) {
+	   
 	   JFrame frame = new JFrame("ATM");
-	   //¸ÕÀú ATM È­¸éÀÌ ¶ß¸é¼­ ¾î¶² ÀÛ¾÷À» ÇÒ Áö ¹öÆ°À» ÅëÇØ ÀÔ·Â ¹Ş´Â´Ù(ÀÔ±İ, Ãâ±İ, ÀÜ¾×Á¶È¸, ¼Û±İ)
-	   //JFrame frame = new JFrame("ATM");
-	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	   JLabel label = new JLabel("ATM : ¿øÇÏ½Ã´Â ÀÛ¾÷À» ¼±ÅÃÇÏ¼¼¿ä.");
-	   Dimension dim = new Dimension(600,400);
-	   frame.add(label);
-	   frame.setLocation(400,200);
-	   frame.setPreferredSize(dim);
-			
-	   // ¹öÆ° »ı¼º
-	   FlowLayout layout = new FlowLayout();
-	   frame.setLayout(layout);
-			
-	   JButton print_button=new JButton("ÀÜ¾×Á¶È¸");
-	   print_button.setBounds(0,0,50,25);
-	   frame.add(print_button);
-	   JButton deposit_button=new JButton("ÀÔ±Ş");
-	   deposit_button.setBounds(0,0,50,25);
-	   frame.add(deposit_button);
-	   JButton withdraw_button=new JButton("Ãâ±Ş");
-	   withdraw_button.setBounds(0,0,50,25);
-	   frame.add(withdraw_button);
-	   JButton remit_button=new JButton("¼Û±İ");
-	   remit_button.setBounds(0,0,50,25);
-	   frame.add(remit_button);
-			
-	   // ¹öÆ°¿¡ °üÇÑ EVENT Handling
-	   // cmd = input.nextInt();
-	   ActionListener eventHandler = new ActionListener() {
-		   @Override
-		   public void actionPerformed(ActionEvent e) {
-	                
-	                if(e.getSource() == print_button){
-	                    System.out.printf("ÀÜ¾×Á¶È¸ÇÏÀÚ!");
-	                    cmd = 1;
-	                    frame.dispose();
-	                }
-	                else if(e.getSource() == deposit_button){
-	                    System.out.printf("ÀÔ±İÇÏÀÚ!");
-	                    cmd = 2;
-	                    frame.dispose();
-	                }
-	                else if(e.getSource() == withdraw_button){
-	                    System.out.printf("Ãâ±İÇÏÀÚ!");
-	                    cmd = 3;
-	                    frame.dispose();
-	                }
-	                else if(e.getSource() == remit_button){
-	                    System.out.printf("¼Û±İÇÏÀÚ!");
-	                    cmd = 4;
-	                    frame.dispose();
-	                }
-	            }
-			};
-		    
-			print_button.addActionListener(eventHandler);
-			deposit_button.addActionListener(eventHandler);
-			withdraw_button.addActionListener(eventHandler);
-			remit_button.addActionListener(eventHandler);
-			
-			frame.pack();
-			frame.setVisible(true);
-			
-			
-	   //frame.exit(0);
-	   //System.exit(0);
-	   return cmd;
+  	   //ë¨¼ì € ATM í™”ë©´ì´ ëœ¨ë©´ì„œ ì–´ë–¤ ì‘ì—…ì„ í•  ì§€ ë²„íŠ¼ì„ í†µí•´ ì…ë ¥ ë°›ëŠ”ë‹¤(ì…ê¸ˆ, ì¶œê¸ˆ, ì”ì•¡ì¡°íšŒ, ì†¡ê¸ˆ)
+  	   //JFrame frame = new JFrame("ATM");
+  	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  	   JLabel label = new JLabel("ATM : ì›í•˜ì‹œëŠ” ì‘ì—…ì„ ì„ íƒí•˜ì„¸ìš”.");
+  	   Dimension dim = new Dimension(600,400);
+  	   frame.add(label);
+  	   frame.setLocation(400,200);
+  	   frame.setPreferredSize(dim);
+  			
+  	   // ë²„íŠ¼ ìƒì„±
+  	   FlowLayout layout = new FlowLayout();
+  	   frame.setLayout(layout);
+  			
+  	   JButton print_button=new JButton("ì”ì•¡ì¡°íšŒ");
+  	   print_button.setBounds(0,0,50,25);
+  	   frame.add(print_button);
+  	   JButton deposit_button=new JButton("ì…ê¸‰");
+  	   deposit_button.setBounds(0,0,50,25);
+  	   frame.add(deposit_button);
+  	   JButton withdraw_button=new JButton("ì¶œê¸‰");
+  	   withdraw_button.setBounds(0,0,50,25);
+  	   frame.add(withdraw_button);
+  	   JButton remit_button=new JButton("ì†¡ê¸ˆ");
+  	   remit_button.setBounds(0,0,50,25);
+  	   frame.add(remit_button);
+  	   JButton exit_button=new JButton("ì¢…ë£Œ");
+	   exit_button.setBounds(0,0,50,25);
+	   frame.add(exit_button);
+  	   
+  	   // ë²„íŠ¼ì— ê´€í•œ EVENT Handling
+  	   ActionListener eventHandler = new ActionListener() {
+  		   @Override
+  		   public void actionPerformed(ActionEvent e) {
+  			 long return_Cash;
+  	                if(e.getSource() == print_button){
+  	                    System.out.printf("ì”ì•¡ì¡°íšŒí•˜ì!");
+  	                    cmd = 1;
+  	                    return_Cash = Show(cmd, id, db, atm);
+  	                }
+  	                else if(e.getSource() == deposit_button){
+  	                    System.out.printf("ì…ê¸ˆí•˜ì!");
+  	                    cmd = 2;
+  	                    return_Cash = Show(cmd, id, db, atm);
+  	                    atm.Deposit(db, id, return_Cash);
+  	                }
+  	                else if(e.getSource() == withdraw_button){
+  	                    System.out.printf("ì¶œê¸ˆí•˜ì!");
+  	                    cmd = 3;
+  	                    return_Cash = Show(cmd, id, db, atm);
+  	                    atm.WithDraw(db, id, return_Cash);
+  	                }
+  	                else if(e.getSource() == remit_button){
+  	                    System.out.printf("ì†¡ê¸ˆí•˜ì!");
+  	                    cmd = 4;
+  	                    return_Cash = Show(cmd, id, db, atm);
+  	                    String to_id;
+	  	                to_id = to_id(0);
+	  	            	if(db.checkingId(to_id)==false) {
+	  	            		while(db.checkingId(to_id)==false) {
+	  	            			to_id = to_id(1);
+  	            			}
+	  	            	}
+  	            		atm.Remit(db, id, to_id, return_Cash);
+  	            		remit_success(db, id);
+  	                }
+  	                else if(e.getSource() == exit_button) {
+  	                	System.out.println("ì¢…ë£Œí•˜ì!");
+  	                	ShowDown();
+  	  	                System.exit(0);
+  	                }
+  	                
+  	            }
+  			};
+  		    
+  			print_button.addActionListener(eventHandler);
+  			deposit_button.addActionListener(eventHandler);
+  			withdraw_button.addActionListener(eventHandler);
+  			remit_button.addActionListener(eventHandler);
+  			exit_button.addActionListener(eventHandler);
+  			
+  			frame.pack();
+  			frame.setVisible(true);
+  			 
    }
    
-   //¼­ºñ½º Á¾·á
+   //ì„œë¹„ìŠ¤ ì¢…ë£Œ
    static void ShowDown() {
-	  JOptionPane.showInternalMessageDialog(null, "¾È³çÈ÷°¡¼¼¿ä °í°´´Ô!");
+	  JOptionPane.showInternalMessageDialog(null, "ì•ˆë…•íˆê°€ì„¸ìš” ê³ ê°ë‹˜!");
    }
 }
