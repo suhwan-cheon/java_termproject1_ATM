@@ -14,9 +14,7 @@ public class Interface {
    
 	//flag에 따라 사용자에게 무언가 보여줍니다.
    static long Show(int flag, String id, DataBase db, ATM atm) {
-	  System.out.println(flag);
       if(flag == 1) { // 잔액조회
-    	 // String message = String.format("Welcome %s, to ATM program!",name);
     	 String message = String.format("잔액 조회 서비스입니다.\n해당 계좌의 잔액은 : %d원 입니다!\n",db.getBalance(id));
     	 JOptionPane.showInternalMessageDialog(null, message);
          return -1;
@@ -30,7 +28,6 @@ public class Interface {
         	 String t_five_cnt = JOptionPane.showInputDialog("입금할 지폐수 중 오 만원권이 몇 개인지 입력하세요");
         	 five_cnt = Integer.parseInt(t_five_cnt);
         	 if(cash != ((long)one_cnt*10000)+((long)five_cnt*50000)) {
-                 //System.out.println("잘못입력하셨습니다! 다시 입력해주세요!");
         		 JOptionPane.showInternalMessageDialog(null, "잘못입력하셨습니다! 다시 입력해주세요!");
              }
         	 else {
@@ -48,6 +45,10 @@ public class Interface {
          while(true) {
         	 String temp_cash = JOptionPane.showInputDialog("출금할 금액을 입력하세요");
         	 cash = Long.parseLong(temp_cash);
+        	 if(cash > db.getBalance(id)) {
+        		 JOptionPane.showInternalMessageDialog(null, "잔액이 부족합니다! 다시 입력해주세요!");
+        		continue; 
+        	 }
         	 String t_one_cnt = JOptionPane.showInputDialog("출금할 지폐수 중 만원권이 몇 개인지 입력하세요");
         	 one_cnt = Integer.parseInt(t_one_cnt);
         	 String t_five_cnt = JOptionPane.showInputDialog("출금할 지폐수 중 오 만원권이 몇 개인지 입력하세요");
@@ -116,13 +117,10 @@ public class Interface {
       return password;
    }
    
- 
-   
    static void transaction(DataBase db, ATM atm) {
 	   
 	   JFrame frame = new JFrame("ATM");
   	   //먼저 ATM 화면이 뜨면서 어떤 작업을 할 지 버튼을 통해 입력 받는다(입금, 출금, 잔액조회, 송금)
-  	   //JFrame frame = new JFrame("ATM");
   	   frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   	   JLabel label = new JLabel("ATM : 원하시는 작업을 선택하세요.");
   	   Dimension dim = new Dimension(600,400);
@@ -156,24 +154,20 @@ public class Interface {
   		   public void actionPerformed(ActionEvent e) {
   			 long return_Cash;
   	                if(e.getSource() == print_button){
-  	                    System.out.printf("잔액조회하자!");
   	                    cmd = 1;
   	                    return_Cash = Show(cmd, id, db, atm);
   	                }
   	                else if(e.getSource() == deposit_button){
-  	                    System.out.printf("입금하자!");
   	                    cmd = 2;
   	                    return_Cash = Show(cmd, id, db, atm);
   	                    atm.Deposit(db, id, return_Cash);
   	                }
   	                else if(e.getSource() == withdraw_button){
-  	                    System.out.printf("출금하자!");
   	                    cmd = 3;
   	                    return_Cash = Show(cmd, id, db, atm);
   	                    atm.WithDraw(db, id, return_Cash);
   	                }
   	                else if(e.getSource() == remit_button){
-  	                    System.out.printf("송금하자!");
   	                    cmd = 4;
   	                    return_Cash = Show(cmd, id, db, atm);
   	                    String to_id;
@@ -187,7 +181,6 @@ public class Interface {
   	            		remit_success(db, id);
   	                }
   	                else if(e.getSource() == exit_button) {
-  	                	System.out.println("종료하자!");
   	                	ShowDown();
   	  	                System.exit(0);
   	                }
