@@ -7,57 +7,57 @@ import javax.swing.*;
 
 public class main {
    
-	static Scanner input = new Scanner(System.in);
-   static int command; //ì‚¬ìš©ìì˜ ì…ë ¥ì„ ë°›ëŠ” ì»¤ë§¨ë“œ
-   static ATM atm = new ATM(); //ATM ê°ì²´
-   static DataBase DB = new DataBase(); //DataBase ê°ì²´
-   static Interface screen; //Interface ê°ì²´
-   static String id;
-   static int password;
+    static Scanner input = new Scanner(System.in);
+    static int command; //»ç¿ëÀÚÀÇ ÀÔ·ÂÀ» ¹Ş´Â Ä¿¸Çµå
+    static ATM atm = new ATM(); //ATM °´Ã¼
+    static DataBase DB = new DataBase(); //DataBase °´Ã¼
+    static Interface screen; //Interface °´Ã¼
+    static String id;
+    static int password;
    
-   public static void main(String[] args) {
+    public static void main(String[] args) {
       
-      //login
-      serviceOn();
-      screen.transaction(DB, atm);
+    	//login
+    	serviceOn();
+    	screen.transaction(DB, atm);
       
-   }
+    }
    
-   // GUIë¡œ ë°”ê¿ˆ
-   private static void serviceOn() {
-      String tmp_id = screen.Input_id(0);
-      while(!Checkid(tmp_id)) {
-         tmp_id = screen.Input_id(1);
-      }
-      int tmp_pass = screen.Input_pass(0);
-      while(!Checkpass(tmp_id, tmp_pass)) {
-         tmp_pass = screen.Input_pass(1);
-      }
-      id = tmp_id; password = tmp_pass;
-   }
+    // GUI·Î ¹Ù²Ş
+    private static void serviceOn() {
+    	String tmp_id = screen.Input_id(0);
+    	while(!Checkid(tmp_id)) {
+    		tmp_id = screen.Input_id(1);
+ 	    }
+    	int tmp_pass = screen.Input_pass(0);
+    	while(!Checkpass(tmp_id, tmp_pass)) {
+    		tmp_pass = screen.Input_pass(1);
+    	}
+    	id = tmp_id; password = tmp_pass;
+    }
    
-   private static void serviceOff() {
-      screen.ShowDown();
-   }
-   //ì…ë ¥í•œ idê°€ í˜•ì‹ì— ë§ëŠ”ì§€ í™•ì¸
-   private static boolean Checkid(String id) {
-	   if(id.length() != 11) return false;
-		for(int i=0; i<id.length(); i++) {
-			char tmp = id.charAt(i);
-			if(i == 5) {
-				if(tmp != '-') return false;
-			}
-			else {
-				if('0' > tmp || tmp > '9') return false;
-			}
-		}
-		if(DB.checkingId(id)) return true;
-		else return false;
-   }
-   //ì…ë ¥í•œ passwordê°€ í˜•ì‹ì— ë§ëŠ”ì§€ í™•ì¸
-   private static boolean Checkpass(String id, int password) {
-      if(!DB.matchingPassword(id, password)) return false;
-      return true;
-   }
-   
-}
+    private static void serviceOff() {
+    	screen.ShowDown();
+    }
+    //ÀÔ·ÂÇÑ id°¡ Çü½Ä¿¡ ¸Â´ÂÁö È®ÀÎ
+    private static boolean Checkid(String id) {
+    	if(id.length() != 11) return false;
+    	for(int i=0; i<id.length(); i++) {
+    		char tmp = id.charAt(i);
+    		if(i == 5) {
+    			if(tmp != '-') return false;
+    		}
+    		else {
+    			if('0' > tmp || tmp > '9') return false;
+    		}
+    	}
+    	if(DB.checkingId(id)) return true;
+    	else return false;
+    }
+    //ÀÔ·ÂÇÑ password°¡ Çü½Ä¿¡ ¸Â´ÂÁö È®ÀÎ
+    private static boolean Checkpass(String id, int password) {
+    	if(!DB.matchingPassword(id, password)) return false;
+    	return true;
+    }
+    
+	}
